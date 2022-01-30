@@ -17,10 +17,17 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpElements()
     }
     
+    func setUpElements() {
+        errorLabel.alpha = 0
+        
+        Utilities.shared.styleTextField(firstNameTextField)
+        Utilities.shared.styleTextField(lastNameTextField)
+        
+        Utilities.shared.styleHollowButton(loginButton)
+    }
 
     @IBAction func loginTapped(_ sender: Any) {
     }

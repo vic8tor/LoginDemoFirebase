@@ -26,11 +26,47 @@ class SignUpViewViewController: UIViewController {
     
     func setUpElements() {
         errorLabel.alpha = 0
-        U
+        
+        Utilities.shared.styleTextField(firstNameTextField)
+        Utilities.shared.styleTextField(lastNameTextField)
+        Utilities.shared.styleTextField(emailTextField)
+        Utilities.shared.styleTextField(passwordTextField)
+        
+        Utilities.shared.styleHollowButton(singUpButton)
     }
     
-
+    func validateFields() -> String {
+        
+        if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            
+            return "Please fill in all fields"
+        }
+        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if Utilities.shared.isPasswordValid(cleanedPassword) == false {
+           return "Please make sure your password is at least 8 characters, contains a special character and a number"
+        }
+        return ""
+    }
+    
     @IBAction func signUpTapped(_ sender: Any) {
+        let error = validateFields()
+        //Validate the fields
+        if error != nil {
+        showError(error)
+        } else {
+            
+        }
+    }
+        
+        func showError(_ error: String) {
+            
+            errorLabel.text = error
+            errorLabel.alpha = 1
+            }
     }
     /*
     // MARK: - Navigation
@@ -41,5 +77,3 @@ class SignUpViewViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
