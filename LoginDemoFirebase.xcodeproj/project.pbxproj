@@ -19,6 +19,8 @@
 		573B366B27A6BA7A005BD7C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573B366A27A6BA7A005BD7C4 /* HomeViewController.swift */; };
 		573B367027A6CCFB005BD7C4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573B366F27A6CCFB005BD7C4 /* Utilities.swift */; };
 		573B367327A6D6B4005BD7C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 573B367227A6D6B4005BD7C4 /* GoogleService-Info.plist */; };
+		573B367527A6F024005BD7C4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573B367427A6F024005BD7C4 /* StorageManager.swift */; };
+		573DE17D27A83E9F001ED74B /* Authentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573DE17C27A83E9F001ED74B /* Authentification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		573B366A27A6BA7A005BD7C4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		573B366F27A6CCFB005BD7C4 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		573B367227A6D6B4005BD7C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		573B367427A6F024005BD7C4 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		573DE17C27A83E9F001ED74B /* Authentification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentification.swift; sourceTree = "<group>"; };
 		7416D923B1F33AB94DE8D6F9 /* Pods-LoginDemoFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginDemoFirebase.release.xcconfig"; path = "Target Support Files/Pods-LoginDemoFirebase/Pods-LoginDemoFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		AA87D19F12C89ED80A84E064 /* Pods-LoginDemoFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginDemoFirebase.debug.xcconfig"; path = "Target Support Files/Pods-LoginDemoFirebase/Pods-LoginDemoFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		E978C1F5CF3E225B1BC666EC /* Pods_LoginDemoFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoginDemoFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				573B367227A6D6B4005BD7C4 /* GoogleService-Info.plist */,
+				573B367627A6F028005BD7C4 /* Services */,
 				573B367127A6CD03005BD7C4 /* Utilities */,
 				573B366D27A6BABA005BD7C4 /* SupportFiles */,
 				573B366C27A6BA91005BD7C4 /* ViewControllers */,
@@ -94,9 +99,9 @@
 		573B366C27A6BA91005BD7C4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				573B365627A6B9D5005BD7C4 /* MainViewController.swift */,
 				573B366627A6BA60005BD7C4 /* SignUpViewViewController.swift */,
 				573B366827A6BA6F005BD7C4 /* LoginViewController.swift */,
+				573B365627A6B9D5005BD7C4 /* MainViewController.swift */,
 				573B366A27A6BA7A005BD7C4 /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
@@ -129,13 +134,21 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		573B367627A6F028005BD7C4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				573B367427A6F024005BD7C4 /* StorageManager.swift */,
+				573DE17C27A83E9F001ED74B /* Authentification.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		A3881F29B42C85AB2498F9F9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				AA87D19F12C89ED80A84E064 /* Pods-LoginDemoFirebase.debug.xcconfig */,
 				7416D923B1F33AB94DE8D6F9 /* Pods-LoginDemoFirebase.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -262,6 +275,8 @@
 				573B366927A6BA6F005BD7C4 /* LoginViewController.swift in Sources */,
 				573B365527A6B9D5005BD7C4 /* SceneDelegate.swift in Sources */,
 				573B366B27A6BA7A005BD7C4 /* HomeViewController.swift in Sources */,
+				573B367527A6F024005BD7C4 /* StorageManager.swift in Sources */,
+				573DE17D27A83E9F001ED74B /* Authentification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
