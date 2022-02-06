@@ -20,30 +20,25 @@ class SignUpViewViewController: UIViewController {
     
     @IBOutlet weak var errorLabel: UILabel!
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
         // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(kbDidShow),
-            name: UIResponder.keyboardDidShowNotification,
-            object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
-    
         setUpElements()
-        
+        activityIndicator.isHidden = true
     }
    // MARK: - PRivate Methods
 
     private func setUpElements() {
         errorLabel.alpha = 0
         
-        Utilities.shared.styleTextField(firstNameTextField)
-        Utilities.shared.styleTextField(lastNameTextField)
-        Utilities.shared.styleTextField(emailTextField)
-        Utilities.shared.styleTextField(passwordTextField)
+        Services.shared.styleTextField(firstNameTextField)
+        Services.shared.styleTextField(lastNameTextField)
+        Services.shared.styleTextField(emailTextField)
+        Services.shared.styleTextField(passwordTextField)
         
-        Utilities.shared.styleHollowButton(singUpButton)
+        Services.shared.styleHollowButton(singUpButton)
     }
     
     private func showError(_ error: String) {
@@ -54,38 +49,18 @@ class SignUpViewViewController: UIViewController {
     
     // MARK: - Public Methods
     
-    @objc func kbDidShow(notifications: Notification) {
-        guard let userInfo = notifications.userInfo else { return }
-        let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width,
-                                                          height: self.view.bounds.height + kbFrameSize.height)
-        
-        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: kbFrameSize.height,
-            right: 0
-        )
-    
-    }
-    @objc func kbDidHide() {
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width,
-                                                          height: self.view.bounds.height)
-    }
-    
     func validateFields() -> String? {
-        
+
         if  Authentification.shared.checkTextField(firstNameTextField) == "" ||
             Authentification.shared.checkTextField(emailTextField) == "" ||
             Authentification.shared.checkTextField(lastNameTextField) == "" ||
             Authentification.shared.checkTextField(passwordTextField) == "" {
-            
+
             return "Please fill in all fields"
         }
         let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        if Utilities.shared.isPasswordValid(cleanedPassword) == false {
+
+        if Services.shared.isPasswordValid(cleanedPassword) == false {
            return "Please make sure your password is at least 8 characters, contains a special character and a number"
         }
         return nil
@@ -102,13 +77,17 @@ class SignUpViewViewController: UIViewController {
             let lastName = Authentification.shared.checkTextField(lastNameTextField)
             let email = Authentification.shared.checkTextField(emailTextField)
             let password = Authentification.shared.checkTextField(passwordTextField)
-
+            
+            activityIndicator.startAnimating()
+             
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 if error != nil {
                     self.showError("Error creating user")
                 } else {
                     let db = Firestore.firestore()
-
+                    
+                    self.activityIndicator.stopAnimating()
+                    
                     db.collection("users").addDocument(data: [
                         "firstname": firstName,
                         "lastName": lastName,
@@ -118,17 +97,16 @@ class SignUpViewViewController: UIViewController {
                             self.showError("Error saving user data")
                         }
                     }
-                    self.translitionHome()
+//                    self.translitionHome()
                 }
-
             }
         }
     }
     // MARK: - Navigation
 
-    private func translitionHome() {
-        let homeVC = storyboard?.instantiateViewController(withIdentifier: "navigationHome") as? UINavigationController
-        view.window?.rootViewController = homeVC
-        view.window?.makeKeyAndVisible()
-    }
+//    private func translitionHome() {
+//        let homeVC = storyboard?.instantiateViewController(withIdentifier: "navigationHome") as? UINavigationController
+//        view.window?.rootViewController = homeVC
+//        view.window?.makeKeyAndVisible()
+//    }
 }
